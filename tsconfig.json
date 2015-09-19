@@ -33,6 +33,7 @@
     "files": [
         "./src/aiService.ts",
         "./src/aiService_test.ts",
+        "./src/draft.ts",
         "./src/end_to_end_tests.ts",
         "./src/game.ts",
         "./src/gameLogic.ts",
