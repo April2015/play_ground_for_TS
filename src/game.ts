@@ -58,7 +58,9 @@ module game {
       // We calculate the AI move only after the animation finishes,
       // because if we call aiService now
       // then the animation will be paused until the javascript finishes.
-      if (!state.delta) {
+
+//The correction is made by myself
+      if (!state.removedMarbles) {
         // This is the first move in the match, so
         // there is not going to be an animation, so
         // call sendComputerMove() now (can happen in ?onlyAIs mode)
@@ -67,7 +69,7 @@ module game {
     }
   }
 
-  export function cellClicked(row: number, col: number): void {
+/*  export function cellClicked(row: number, col: number): void {
     log.info(["Clicked on cell:", row, col]);
     if (window.location.search === '?throwException') { // to test encoding a stack trace with sourcemap
       throw new Error("Throwing the error because URL has '?throwException'");
@@ -83,7 +85,7 @@ module game {
       log.info(["Cell is already full in position:", row, col]);
       return;
     }
-  }
+  } */
 
   export function shouldShowImage(row: number, col: number): boolean {
     var cell = state.board[row][col];
@@ -98,11 +100,11 @@ module game {
     return state.board[row][col] === 'O';
   }
 
-  export function shouldSlowlyAppear(row: number, col: number): boolean {
+/*  export function shouldSlowlyAppear(row: number, col: number): boolean {
     return !animationEnded &&
         state.delta &&
         state.delta.row === row && state.delta.col === col;
-  }
+  } */
 }
 
 angular.module('myApp', ['ngTouch', 'ui.bootstrap'])

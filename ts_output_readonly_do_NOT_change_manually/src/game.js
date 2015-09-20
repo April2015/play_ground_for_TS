@@ -53,7 +53,8 @@ var game;
             // We calculate the AI move only after the animation finishes,
             // because if we call aiService now
             // then the animation will be paused until the javascript finishes.
-            if (!state.delta) {
+            //The correction is made by myself
+            if (!state.removedMarbles) {
                 // This is the first move in the match, so
                 // there is not going to be an animation, so
                 // call sendComputerMove() now (can happen in ?onlyAIs mode)
@@ -61,25 +62,23 @@ var game;
             }
         }
     }
-    function cellClicked(row, col) {
+    /*  export function cellClicked(row: number, col: number): void {
         log.info(["Clicked on cell:", row, col]);
-        if (window.location.search === '?throwException') {
-            throw new Error("Throwing the error because URL has '?throwException'");
+        if (window.location.search === '?throwException') { // to test encoding a stack trace with sourcemap
+          throw new Error("Throwing the error because URL has '?throwException'");
         }
         if (!canMakeMove) {
-            return;
+          return;
         }
         try {
-            var move = gameLogic.createMove(state.board, row, col, turnIndex);
-            canMakeMove = false; // to prevent making another move
-            gameService.makeMove(move);
+          var move = gameLogic.createMove(state.board, row, col, turnIndex);
+          canMakeMove = false; // to prevent making another move
+          gameService.makeMove(move);
+        } catch (e) {
+          log.info(["Cell is already full in position:", row, col]);
+          return;
         }
-        catch (e) {
-            log.info(["Cell is already full in position:", row, col]);
-            return;
-        }
-    }
-    game.cellClicked = cellClicked;
+      } */
     function shouldShowImage(row, col) {
         var cell = state.board[row][col];
         return cell !== "";
@@ -93,12 +92,6 @@ var game;
         return state.board[row][col] === 'O';
     }
     game.isPieceO = isPieceO;
-    function shouldSlowlyAppear(row, col) {
-        return !animationEnded &&
-            state.delta &&
-            state.delta.row === row && state.delta.col === col;
-    }
-    game.shouldSlowlyAppear = shouldSlowlyAppear;
 })(game || (game = {}));
 angular.module('myApp', ['ngTouch', 'ui.bootstrap'])
     .run(['initGameServices', function (initGameServices) {

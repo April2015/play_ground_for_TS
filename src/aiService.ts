@@ -12,12 +12,13 @@ module aiService {
     // 0) endMatch or setTurn
     // 1) {set: {key: 'board', value: ...}}
     // 2) {set: {key: 'delta', value: ...}}]
-    return alphaBetaService.alphaBetaDecision(
-        [null, {set: {key: 'board', value: board}}],
-        playerIndex, getNextStates, getStateScoreForIndex0,
-        // If you want to see debugging output in the console, then surf to game.html?debug
-        window.location.search === '?debug' ? getDebugStateToString : null,
-        alphaBetaLimits);
+    // return alphaBetaService.alphaBetaDecision(
+    //     [null, {set: {key: 'board', value: board}}],
+    //     playerIndex, getNextStates, getStateScoreForIndex0,
+    //     // If you want to see debugging output in the console, then surf to game.html?debug
+    //     window.location.search === '?debug' ? getDebugStateToString : null,
+    //     alphaBetaLimits);
+    return [];
   }
 
   function getStateScoreForIndex0(move: IMove, playerIndex: number): number {
@@ -30,9 +31,9 @@ module aiService {
     return 0;
   }
 
-  function getNextStates(move: IMove, playerIndex: number): IMove[] {
+/*  function getNextStates(move: IMove, playerIndex: number): IMove[] {
     return gameLogic.getPossibleMoves(move[1].set.value, playerIndex);
-  }
+  } */
 
   function getDebugStateToString(move: IMove): string {
     return "\n" + move[1].set.value.join("\n") + "\n";
